@@ -160,7 +160,6 @@ displayLoop:
 
 	
 	j displayLoop
-
 	
 initDino:
 	# initialize the position of the dino
