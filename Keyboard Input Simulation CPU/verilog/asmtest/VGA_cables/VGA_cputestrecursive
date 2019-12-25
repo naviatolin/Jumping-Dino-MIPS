@@ -1,0 +1,25 @@
+# Calculate the Nth Fibonacci number
+#   Loop-based solution
+#   Provide argument N in register a0
+#   F_n will be stored in register v0 when the program terminates
+#VGA cables
+#Tower of Hanoi Recursion
+#Set Base Case
+addi $t1,$zero,1
+#Set N value
+addi $a0,$zero,5
+#initialize count
+addi $t0,$zero,2
+#Calculation Loop
+loop:
+#add $t2,$zero,$t1
+#add $t3,$t1,$t2 #times two
+add $t3,$t1,$t1
+addi $t4,$t3, 1
+beq $t0, $a0, breakloop #leave the loop if n=count
+addi $t0,$t0,1 #count+1
+add $t1,$zero,$t4
+j loop
+breakloop:
+add $v0,$zero,$t4
+

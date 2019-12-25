@@ -1,0 +1,74 @@
+#! /usr/local/Cellar/icarus-verilog/10.3/bin/vvp
+:ivl_version "10.3 (stable)" "(v10_3)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x7f81b3404af0 .scope module, "signextTest" "signextTest" 2 3;
+ .timescale 0 0;
+v0x7f81b3418630_0 .var "immediate", 15 0;
+v0x7f81b34186f0_0 .net "signextimm", 31 0, v0x7f81b3418550_0;  1 drivers
+S_0x7f81b34087a0 .scope module, "dut" "signextend" 2 7, 3 1 0, S_0x7f81b3404af0;
+ .timescale 0 0;
+    .port_info 0 /OUTPUT 32 "signextimm"
+    .port_info 1 /INPUT 16 "immediate"
+v0x7f81b3404c50_0 .net "immediate", 15 0, v0x7f81b3418630_0;  1 drivers
+v0x7f81b34184b0_0 .var "signext", 31 0;
+v0x7f81b3418550_0 .var "signextimm", 31 0;
+E_0x7f81b3403fe0 .event edge, v0x7f81b3404c50_0, v0x7f81b34184b0_0;
+S_0x7f81b3408640 .scope module, "zerosignextend" "zerosignextend" 3 15;
+ .timescale 0 0;
+    .port_info 0 /OUTPUT 32 "zerosignextimm"
+    .port_info 1 /INPUT 16 "immediate"
+o0x7f81b80380f8 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+v0x7f81b34187e0_0 .net "immediate", 15 0, o0x7f81b80380f8;  0 drivers
+v0x7f81b34188a0_0 .var "zerosignext", 31 0;
+v0x7f81b3418950_0 .var "zerosignextimm", 31 0;
+E_0x7f81b34187a0 .event edge, v0x7f81b34188a0_0, v0x7f81b34187e0_0;
+    .scope S_0x7f81b34087a0;
+T_0 ;
+    %wait E_0x7f81b3403fe0;
+    %load/vec4 v0x7f81b3404c50_0;
+    %parti/s 1, 15, 5;
+    %replicate 16;
+    %pad/u 32;
+    %assign/vec4 v0x7f81b34184b0_0, 0;
+    %load/vec4 v0x7f81b34184b0_0;
+    %load/vec4 v0x7f81b3404c50_0;
+    %concat/vec4; draw_concat_vec4
+    %pad/u 32;
+    %assign/vec4 v0x7f81b3418550_0, 0;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x7f81b3404af0;
+T_1 ;
+    %pushi/vec4 32767, 0, 16;
+    %store/vec4 v0x7f81b3418630_0, 0, 16;
+    %delay 1, 0;
+    %load/vec4 v0x7f81b34186f0_0;
+    %cmpi/ne 32767, 0, 32;
+    %jmp/0xz  T_1.0, 4;
+    %vpi_call 2 12 "$display", "Error" {0 0 0};
+T_1.0 ;
+    %end;
+    .thread T_1;
+    .scope S_0x7f81b3408640;
+T_2 ;
+    %wait E_0x7f81b34187a0;
+    %pushi/vec4 0, 0, 32;
+    %assign/vec4 v0x7f81b34188a0_0, 0;
+    %load/vec4 v0x7f81b34188a0_0;
+    %load/vec4 v0x7f81b34187e0_0;
+    %concat/vec4; draw_concat_vec4
+    %pad/u 32;
+    %assign/vec4 v0x7f81b3418950_0, 0;
+    %jmp T_2;
+    .thread T_2, $push;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "Addresses_and_Immediates/signextimm.t.v";
+    "Addresses_and_Immediates/signextimm.v";
